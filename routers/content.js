@@ -6,4 +6,4 @@ router.get("/content", async (req, res) => {
     res.json({ data: "Hello!" })
 })
 
-export default router;
+export default router

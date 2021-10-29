@@ -1,19 +1,16 @@
 import sequelize from "sequelize"
-const { Sequelize, DataTypes } = sequelize;
+const DataTypes = sequelize.DataTypes;
+import db from "./db.js"
 import bcrypt from "bcrypt"
 
 const saltRounds = Number(process.env.SALT);
 
-const dbConnection = new Sequelize('postgres', 'postgres', 'postgres', {
-    host: 'localhost',
-    dialect: 'postgres'
-});
-
-const User = dbConnection.define("user", {
+const User = db.define("user", {
     username: DataTypes.TEXT,
     password: DataTypes.TEXT,
 });
 
+User.sync()
 
 User.beforeSave(async (user, options) => {
     const hashedPassword = await bcrypt.hash(user.password, saltRounds);

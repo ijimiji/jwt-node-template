@@ -1,5 +1,5 @@
 import express from "express"
-import userDB from "../db/userDB.js"
+import userDB from "../db/userDb.js"
 import jwt from "jsonwebtoken"
 
 const router = express.Router()
@@ -18,9 +18,8 @@ router.post("/register", async (req, res) => {
         const token = jwt.sign(user, secret, { expiresIn: '1h' })
         res.json({ token: token })
     } else {
-        res.status(400)
-        res.json({ error: "User is already registered" })
+        res.status(400).json({ error: "User is already registered" })
     }
 })
 
-export default router;
+export default router
