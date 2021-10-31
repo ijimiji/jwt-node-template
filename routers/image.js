@@ -1,8 +1,10 @@
-import multer from "multer"
 import express from "express"
-import imageDb from "../db/imageDb.js"
+import multer from "multer"
+import imageController from "../controllers/image.js"
+
 const router = express.Router()
-const upload = multer({ //dest: 'uploads/', 
+
+const upload = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, './uploads')
@@ -14,9 +16,6 @@ const upload = multer({ //dest: 'uploads/',
         }
     })
 })
-
-router.post("/image/upload", upload.single("image"), async (req, res) => {
-    res.json({ filename: req.file.filename })
-})
+router.post("/image/upload", upload.single("image"), imageController)
 
 export default router

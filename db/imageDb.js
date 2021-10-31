@@ -10,8 +10,8 @@ const Pictures = db.define("image", {
 Pictures.sync()
 
 export default {
-    loadImage: async (name) => {
-        const image = await Pictures.findOne({ where: { name: name } })
+    loadImage: async (fileName) => {
+        const image = await Pictures.findOne({ where: { fileName: fileName } })
         return image.fileName
     },
     uploadImage: async (fileName) => {
